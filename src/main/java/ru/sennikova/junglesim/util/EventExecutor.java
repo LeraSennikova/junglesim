@@ -43,9 +43,6 @@ public class EventExecutor {
     private void sleepEvent(Dolphin dolphin) {
         int energy = dolphin.getEnergy();
         energy = energy + 100;
-        if (energy > 1000) {
-            energy = 1000;
-        }
         dolphin.setEnergy(energy);
         System.out.println("Дельфин поспал. Вся энергия: " + dolphin.getEnergy() + " Все здоровье: " + dolphin.getHealth());
     }
@@ -65,6 +62,7 @@ public class EventExecutor {
         int energy = dolphin.getEnergy();
         int health = dolphin.getHealth();
         energy = energy - 50;
+        health = health + dolphin.getFeed() * 6;
         dolphin.setEnergy(energy);
         dolphin.setHealth(health);
         checkEnergy(dolphin);
@@ -124,9 +122,6 @@ public class EventExecutor {
         int health = dolphin.getHealth();
         energy = energy - 20;
         health = health + dolphin.getFeed() * 2;
-        if (health > 1000) {
-            health = 1000;
-        }
         dolphin.setEnergy(energy);
         dolphin.setHealth(health);
         checkEnergy(dolphin);
@@ -165,6 +160,9 @@ public class EventExecutor {
         if (health <= 0) {
             health = 0;
         }
+        if (health > 1000) {
+            health = 1000;
+        }
         dolphin.setHealth(health);
     }
 
@@ -174,6 +172,9 @@ public class EventExecutor {
         if (energy < 0) {
             energy = 0;
             health = health - 10;
+        }
+        if (energy > 1000) {
+            energy = 1000;
         }
         dolphin.setEnergy(energy);
         dolphin.setHealth(health);
